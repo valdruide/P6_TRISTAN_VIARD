@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const stuffRoutes = require('./routes/sauce')
+const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user')
 
 mongoose.connect('mongodb+srv://tristan:admin@cluster0.4mrastv.mongodb.net/?retryWrites=true&w=majority',
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/sauces', stuffRoutes);
+app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')))
 
