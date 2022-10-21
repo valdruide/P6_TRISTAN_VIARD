@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', auth, sauceCtrl.getAllThings);
 router.post('/', auth,  multer, sauceCtrl.createThing)
 router.get('/:id', auth, sauceCtrl.findOneThing);
-router.put('/:id', auth, sauceCtrl.modifyThing)
+router.put('/:id', auth, multer, sauceCtrl.modifyThing)
 router.delete('/:id', auth, sauceCtrl.deleteThing)
 router.post("/:id/like", auth, sauceCtrl.likeDislikeSauce)
 
