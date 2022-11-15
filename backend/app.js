@@ -6,6 +6,8 @@ const path = require('path');
 const sauceRoutes = require('./routes/sauce')
 const userRoutes = require('./routes/user')
 
+
+//Connexion à la base de donnée MongoDB
 mongoose.connect('mongodb+srv://tristan:admin@cluster0.4mrastv.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
@@ -22,6 +24,7 @@ app.use((req, res, next) => {
     next();
 });
 
+//utilise les routes sauces et user + les images
 app.use('/api/sauces', sauceRoutes);
 app.use('/api/auth', userRoutes);
 app.use('/images', express.static(path.join(__dirname, 'images')))
