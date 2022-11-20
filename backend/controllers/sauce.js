@@ -1,7 +1,7 @@
 const Sauce = require("../models/sauce");
 const fs = require("fs");
 
-exports.createThing = (req, res, next) => {
+exports.createSauce = (req, res, next) => {
   const thingObject = JSON.parse(req.body.sauce);
   delete thingObject._id;
   delete thingObject._userId;
@@ -25,7 +25,7 @@ exports.createThing = (req, res, next) => {
     });
 };
 
-exports.modifyThing = (req, res, next) => {
+exports.modifySauce = (req, res, next) => {
   let sauceObject = {};
   req.file //vérifie si l'user change l'image
     ? (Sauce.findOne({ _id: req.params.id }).then((sauce) => { //compare l'id de la sauce dans l'URL pour le trouver dans la bdd
@@ -43,7 +43,7 @@ exports.modifyThing = (req, res, next) => {
     .catch((error) => res.status(400).json({ error }));
 };
 
-exports.deleteThing = (req, res, next) => {
+exports.deleteSauce = (req, res, next) => {
   Sauce.findOne({ _id: req.params.id }) //compare l'id de la sauce dans l'URL pour le trouver dans la bdd
     .then((thing) => {
       if (thing.userId != req.auth.userId) { //si l'user n'est pas celui qui a créé la sauce : non autorisé à supprimer
@@ -64,13 +64,13 @@ exports.deleteThing = (req, res, next) => {
     });
 };
 
-exports.findOneThing = (req, res, next) => { //afiche une sauce 
+exports.findOneSauce = (req, res, next) => { //afiche une sauce 
   Sauce.findOne({ _id: req.params.id })
     .then((thing) => res.status(200).json(thing))
     .catch((error) => res.status(404).json({ error }));
 };
 
-exports.getAllThings = (req, res, next) => { //affiche toutes les sauces
+exports.getAllSauces = (req, res, next) => { //affiche toutes les sauces
   Sauce.find()
     .then((things) => res.status(200).json(things))
     .catch((error) => res.status(400).json({ error }));
