@@ -11,8 +11,8 @@ exports.createSauce = (req, res, next) => {
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
     likes: 0,
     dislikes: 0,
-    usersLiked: [" "],
-    usersdisLiked: [" "],
+    usersLiked: [],
+    usersdisLiked: []
   });
 
   thing
@@ -93,12 +93,12 @@ exports.likeDislikeSauce = (req, res, next) => {
       Sauce.findOne({ _id: sauceId })
         .then((sauce) => {
           if (sauce.usersLiked.includes(userId)) {
-            Thing.updateOne({ _id: sauceId }, { $pull: { usersLiked: userId }, $inc: { likes: -1 } }) //retire le like
+            Sauce.updateOne({ _id: sauceId }, { $pull: { usersLiked: userId }, $inc: { likes: -1 } }) //retire le like
               .then(() => res.status(200).json({ message: `Neutre` }))
               .catch((error) => res.status(400).json({ error }));
           }
           if (sauce.usersDisliked.includes(userId)) {
-            Thing.updateOne({ _id: sauceId }, { $pull: { usersDisliked: userId }, $inc: { dislikes: -1 } }) //retire le dislike
+            Sauce.updateOne({ _id: sauceId }, { $pull: { usersDisliked: userId }, $inc: { dislikes: -1 } }) //retire le dislike
               .then(() => res.status(200).json({ message: `Neutre` }))
               .catch((error) => res.status(400).json({ error }));
           }
