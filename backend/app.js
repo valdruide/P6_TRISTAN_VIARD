@@ -8,7 +8,7 @@ const userRoutes = require('./routes/user')
 
 
 //Connexion à la base de donnée MongoDB
-mongoose.connect('mongodb+srv://tristan:admin@cluster0.4mrastv.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://tristan:Azerty0123@cluster0.4mrastv.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
